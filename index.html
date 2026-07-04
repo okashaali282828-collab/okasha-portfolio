@@ -26,7 +26,7 @@
         <button class="nav-btn" data-index="5"><i class="fas fa-envelope"></i> <span>Contact</span></button>
     </nav>
 
-    <!-- Main 3D Viewport -->
+    <!-- Main 3D Viewport Wrapper -->
     <div class="container">
         <div class="space-3d">
 
@@ -34,12 +34,14 @@
             <section class="panel">
                 <div class="content hero-content">
                     <div class="profile-img-container">
-                        <img src="my-avatar.jpg" alt="Muhammad Okasha" class="profile-img">
+                        <!-- Default placeholder text block if image path is not updated yet -->
+                        <img src="my-avatar.jpg" alt="" class="profile-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="fallback-avatar"><i class="fas fa-user-tie"></i></div>
                     </div>
                     <h1>MUHAMMAD OKASHA</h1>
                     <p class="subtitle">Computer Science Student & AI / ML Enthusiast</p>
-                    <a href="Muhammad_Okasha_CV.pdf" target="_blank" class="cv-btn">
-                        <i class="fas fa-file-pdf"></i> Download CV
+                    <a href="Muhammad_Okasha_CV.pdf.pdf" target="_blank" class="cv-btn">
+                        <i class="fas fa-file-pdf"></i> Download CV[cite: 1]
                     </a>
                 </div>
             </section>
@@ -135,6 +137,9 @@
 
         </div>
     </div>
+
+    <!-- Dummy spacer to force browser body height scrolling -->
+    <div class="scroll-spacer"></div>
 
     <script src="script.js"></script>
 </body>
