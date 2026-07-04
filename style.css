@@ -9,10 +9,18 @@ body {
     background: #06090f;
     color: #ffffff;
     overflow-x: hidden;
-    height: 6000px; /* Scroll zone length */
 }
 
-/* 3D Stars Background */
+/* Force document height so scroll events work correctly */
+.scroll-spacer {
+    height: 600vh;
+    width: 100%;
+    pointer-events: none;
+    position: relative;
+    z-index: 0;
+}
+
+/* Animated 3D Stars Background */
 .stars-background {
     position: fixed;
     top: 0;
@@ -28,14 +36,9 @@ body {
     background: white;
     border-radius: 50%;
     opacity: 0.6;
-    animation: floatStars 20s infinite linear;
-}
-@keyframes floatStars {
-    0% { transform: translateY(0px) translateZ(0px); }
-    100% { transform: translateY(-1000px) translateZ(500px); }
 }
 
-/* Sidebar Navigation Layout & Animations */
+/* Sidebar Navigation Layout */
 .sidebar {
     position: fixed;
     left: 30px;
@@ -89,7 +92,7 @@ body {
     box-shadow: 0 0 15px rgba(88, 166, 255, 0.6);
 }
 
-/* 3D Space & Container */
+/* 3D Space Viewport */
 .container {
     width: 100%;
     height: 100vh;
@@ -127,19 +130,14 @@ body {
     width: 90%;
     max-width: 850px;
     padding: 40px;
-    background: rgba(13, 17, 23, 0.75);
+    background: rgba(13, 17, 23, 0.85);
     border: 1px solid rgba(48, 54, 61, 0.8);
     border-radius: 24px;
     backdrop-filter: blur(12px);
     box-shadow: 0 30px 60px rgba(0,0,0,0.7);
     transform: translateZ(80px);
-    transition: transform 0.3s;
-}
-.content:hover {
-    transform: translateZ(100px) scale(1.01);
 }
 
-/* Typography & Visual Elements */
 h1 { font-size: 3.5rem; color: #58a6ff; letter-spacing: 2px; margin-bottom: 10px; }
 h2 { font-size: 2.3rem; color: #58a6ff; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 10px; }
 h3.sub-heading { font-size: 1.5rem; color: #79c0ff; margin-top: 25px; margin-bottom: 15px; }
@@ -155,12 +153,21 @@ p { font-size: 1.1rem; color: #c9d1d9; line-height: 1.6; }
     overflow: hidden;
     border: 4px solid #58a6ff;
     box-shadow: 0 0 25px rgba(88, 166, 255, 0.4);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #161b22;
 }
 .profile-img { width: 100%; height: 100%; object-fit: cover; }
-.profile-img-container:hover {
-    transform: scale(1.1) rotateY(20deg) rotateX(15deg);
-    box-shadow: -10px 10px 30px rgba(88, 166, 255, 0.7);
+.fallback-avatar {
+    display: flex;
+    font-size: 4rem;
+    color: #58a6ff;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Modern Button Styling */
