@@ -6,55 +6,61 @@ const navButtons = gsap.utils.toArray('.nav-btn');
 
 // --- 1. Dynamic 3D Stars Generator ---
 const starsBg = document.getElementById('stars-bg');
-for (let i = 0; i < 80; i++) {
+for (let i = 0; i < 100; i++) {
     const star = document.createElement('div');
     star.classList.add('star');
     star.style.width = `${Math.random() * 3}px`;
     star.style.height = star.style.width;
     star.style.left = `${Math.random() * 100}%`;
     star.style.top = `${Math.random() * 100}%`;
-    star.style.animationDelay = `${Math.random() * 10}s`;
+    
+    // Add custom floating animations using basic GSAP
+    gsap.to(star, {
+        y: "-=300",
+        x: `+=${Math.random() * 100 - 50}`,
+        repeat: -1,
+        duration: Math.random() * 20 + 10,
+        ease: "none",
+        delay: Math.random() * -20
+    });
+    
     starsBg.appendChild(star);
 }
 
-// --- 2. 3D Panels Initial Depth Setup ---
+// --- 2. 3D Panels Setup ---
 panels.forEach((panel, i) => {
     if (i === 0) {
         gsap.set(panel, { opacity: 1, z: 0, rotationY: 0 });
     } else {
-        // Pushing subsequent panels deep into the 3D space and giving alternating rotations
         gsap.set(panel, { 
             opacity: 0, 
-            z: -i * 1800, 
-            rotationY: i % 2 === 0 ? 25 : -25 
+            z: -i * 2000, // Safe deep space placement
+            rotationY: i % 2 === 0 ? 20 : -20 
         });
     }
 });
 
-// --- 3. Main GSAP Timeline for 3D Camera Travel ---
+// --- 3. Main GSAP Timeline for Scroll ---
 const tl = gsap.timeline({
     scrollTrigger: {
-        trigger: "body",
+        trigger: ".scroll-spacer",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.2, // Ultra-smooth scrolling transition
-        pin: ".container",
-        invalidateOnRefresh: true
+        scrub: 1.5, // Smooth lag effect
     }
 });
 
-// Animate panels dynamically through the 3D space on scroll
 panels.forEach((panel, i) => {
     if (i > 0) {
         const prevPanel = panels[i - 1];
         
-        // Flight path simulation (Zoom out previous panel, Zoom in current panel)
-        tl.to(prevPanel, { opacity: 0, z: 1000, rotationY: i % 2 === 0 ? -45 : 45, duration: 1 }, i - 0.4)
+        // Dynamic Zoom Out and Zoom In transitions
+        tl.to(prevPanel, { opacity: 0, z: 1200, rotationY: i % 2 === 0 ? -35 : 35, duration: 1 }, i - 0.4)
           .to(panel, { opacity: 1, z: 0, rotationY: 0, duration: 1 }, i - 0.4);
     }
 });
 
-// --- 4. Sidebar Active State & Synchronization ---
+// --- 4. Sidebar Sync with Scrolling State ---
 function updateNavActiveState(index) {
     navButtons.forEach((btn, i) => {
         if (i === index) btn.classList.add('active');
@@ -62,24 +68,22 @@ function updateNavActiveState(index) {
     });
 }
 
-// Track page scroll to light up current active navigation button automatically
 panels.forEach((_, i) => {
     ScrollTrigger.create({
-        trigger: "body",
-        start: () => `top+=${(i * 1000) - 200} top`,
-        end: () => `top+=${((i + 1) * 1000) - 200} top`,
+        trigger: ".scroll-spacer",
+        start: () => `top+=${(i / panels.length) * document.querySelector('.scroll-spacer').scrollHeight} top`,
+        end: () => `top+=${((i + 1) / panels.length) * document.querySelector('.scroll-spacer').scrollHeight} top`,
         onToggle: self => { if (self.isActive) updateNavActiveState(i); }
     });
 });
 
-// --- 5. Sidebar Button Click to Smooth 3D Travel ---
+// --- 5. Navigation Button Click Events ---
 navButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
+    button.addEventListener('click', () => {
         const targetIndex = parseInt(button.getAttribute('data-index'));
-        const totalScrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const targetScrollPos = (targetIndex / (panels.length - 1)) * totalScrollHeight;
+        const spacerHeight = document.querySelector('.scroll-spacer').scrollHeight;
+        const targetScrollPos = (targetIndex / panels.length) * spacerHeight + 50;
 
-        // Smoothly scroll the screen to the absolute position representing that 3D layer
         window.scrollTo({
             top: targetScrollPos,
             behavior: 'smooth'
