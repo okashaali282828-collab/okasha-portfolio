@@ -44,7 +44,7 @@ function initMatrixBackground() {
 function scrollToSection(id) {
     const element = document.getElementById(id);
     if (element) {
-        const offset = 80;
+        const offset = 80; // Navbar fixed height layout buffer
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
@@ -64,7 +64,7 @@ function handleNavbarHighlights() {
 
     let currentSectionId = "";
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - 140;
+        const sectionTop = section.offsetTop - 120;
         if (window.scrollY >= sectionTop) {
             currentSectionId = section.getAttribute('id');
         }
@@ -78,30 +78,8 @@ function handleNavbarHighlights() {
     });
 }
 
-// --- 4. RELIABLE SCROLL ANIMATION TRACKER ---
-function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    
-    function checkVisibility() {
-        animatedElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            // Agar card screen par thoda sa bhi enter kare to foran show kar do
-            if (rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9) {
-                el.classList.add('visible');
-            }
-        });
-    }
-
-    // Load hote hi check karega
-    checkVisibility();
-    // Scroll aur resize par bhi continuous run hoga
-    window.addEventListener('scroll', checkVisibility);
-    window.addEventListener('resize', checkVisibility);
-}
-
 // RUN CONTROLLER PACKETS ON DOM LOADED
 window.addEventListener('DOMContentLoaded', () => {
     initMatrixBackground();
-    initScrollAnimations();
     window.addEventListener('scroll', handleNavbarHighlights);
 });
