@@ -6,6 +6,8 @@
     <title>Muhammad Okasha - Portfolio</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,34 +16,36 @@
     <!-- Stars Animation Background -->
     <div class="stars-background" id="stars-bg"></div>
 
-    <!-- Sidebar Navigation -->
+    <!-- Modern Sidebar Navigation -->
     <nav class="sidebar">
         <button class="nav-btn active" data-index="0"><i class="fas fa-user"></i><span>About</span></button>
         <button class="nav-btn" data-index="1"><i class="fas fa-laptop-code"></i><span>Skills</span></button>
-        <button class="nav-btn" data-index="2"><i class="fas fa-graduation-cap"></i><span>Education</span></button>
-        <button class="nav-btn" data-index="3"><i class="fas fa-project-diagram"></i><span>Projects</span></button>
-        <button class="nav-btn" data-index="4"><i class="fas fa-envelope"></i><span>Contact</span></button>
+        <button class="nav-btn" data-index="2"><i class="fas fa-briefcase"></i><span>Experience</span></button>
+        <button class="nav-btn" data-index="3"><i class="fas fa-graduation-cap"></i><span>Education</span></button>
+        <button class="nav-btn" data-index="4"><i class="fas fa-trophy"></i><span>Achievements</span></button>
+        <button class="nav-btn" data-index="5"><i class="fas fa-project-diagram"></i><span>Projects</span></button>
+        <button class="nav-btn" data-index="6"><i class="fas fa-envelope"></i><span>Contact</span></button>
     </nav>
 
-    <!-- Main 3D Container -->
+    <!-- Main Slide Viewport Container -->
     <div class="container">
-        <div class="space-3d">
+        <div class="space-3d"> <!-- Acts as our horizontal slider train -->
 
-            <!-- PANEL 1: About -->
+            <!-- PAGE 1: About -->
             <section class="panel">
                 <div class="content hero-content">
                     <div class="profile-img-container">
-                        <img src="my-avatar.jpg" alt="Muhammad Okasha" class="profile-img">
+                        <img src="my-avatar.png" alt="Muhammad Okasha" class="profile-img">
                     </div>
                     <h1>MUHAMMAD OKASHA</h1>
                     <p class="subtitle">Computer Science Student & AI / ML Enthusiast</p>
-                    <a href="Muhammad_Okasha_CV.pdf" class="cv-btn" download>
+                    <a href="your-cv.pdf" class="cv-btn" download>
                         <i class="fas fa-file-pdf"></i> Download CV
                     </a>
                 </div>
             </section>
 
-            <!-- PANEL 2: Skills & Services -->
+            <!-- PAGE 2: Skills -->
             <section class="panel">
                 <div class="content">
                     <h2><i class="fas fa-laptop-code"></i> Skills & Expertise</h2>
@@ -72,7 +76,26 @@
                 </div>
             </section>
 
-            <!-- PANEL 3: Education -->
+            <!-- PAGE 3: Experience (NEW ✨) -->
+            <section class="panel">
+                <div class="content">
+                    <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <p class="institute">AI Developer Intern</p>
+                            <p class="details">Tech Company | Months 2026 - Present</p>
+                            <p style="font-size:0.9rem; color:#8b949e; margin-top:5px;">Worked on optimization of Machine Learning models and custom dataset preprocessing pipelines.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <p class="institute">Freelance Web Developer</p>
+                            <p class="details">Self-Employed | 2024 - 2025</p>
+                            <p style="font-size:0.9rem; color:#8b949e; margin-top:5px;">Developed highly responsive modern landing pages and portfolio sites using clean frontend code.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 4: Education -->
             <section class="panel">
                 <div class="content">
                     <h2><i class="fas fa-graduation-cap"></i> Education</h2>
@@ -95,7 +118,30 @@
                 </div>
             </section>
 
-            <!-- PANEL 4: Projects -->
+            <!-- PAGE 5: Achievements (NEW ✨) -->
+            <section class="panel">
+                <div class="content">
+                    <h2><i class="fas fa-trophy"></i> Achievements</h2>
+                    <div class="achievements-container">
+                        <div class="achievement-card">
+                            <i class="fas fa-award"></i>
+                            <div>
+                                <h4>Hackathon Runner Up</h4>
+                                <p>Secured 2nd position in National Level Hackathon for deploying an AI Prototype.</p>
+                            </div>
+                        </div>
+                        <div class="achievement-card">
+                            <i class="fas fa-certificate"></i>
+                            <div>
+                                <h4>Certified ML Specialist</h4>
+                                <p>Successfully completed advanced global certifications in Deep Learning & Neural Networks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 6: Projects -->
             <section class="panel">
                 <div class="content">
                     <h2><i class="fas fa-project-diagram"></i> Featured Projects</h2>
@@ -105,14 +151,14 @@
                             <p>An intelligent AI assistant built using Python and NLP techniques to automate customer support queries.</p>
                         </div>
                         <div class="project-card">
-                            <h3>3D Portfolio</h3>
-                            <p>A premium interactive 3D portfolio website utilizing GSAP animations and responsive design layout.</p>
+                            <h3>Horizontal Tech Portfolio</h3>
+                            <p>A premium interactive horizontal slide portfolio utilizing advanced GSAP timeline transitions.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- PANEL 5: Contact -->
+            <!-- PAGE 7: Contact -->
             <section class="panel">
                 <div class="content">
                     <h2><i class="fas fa-envelope"></i> Let's Connect</h2>
