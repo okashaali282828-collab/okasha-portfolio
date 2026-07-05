@@ -1,117 +1,127 @@
-window.addEventListener('DOMContentLoaded', () => {
-    gsap.registerPlugin(ScrollTrigger);
+// --- 1. LIVE MATRIX DIGITAL RAIN CODE BACKGROUND ANIMATION ---
+function initMatrixBackground() {
+    const canvas = document.getElementById('bg-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
 
-    const space = document.querySelector('.space-3d');
-    const panels = gsap.utils.toArray('.panel');
-    const navButtons = gsap.utils.toArray('.nav-btn');
+    // Handle viewport changes cleanly
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
-    // --- 1. STARS BACKGROUND CREATION ---
-    const starsBg = document.getElementById('stars-bg');
-    if(starsBg) {
-        for (let i = 0; i < 50; i++) {
-            const star = document.createElement('div');
-            star.classList.add('star');
-            star.style.width = `${Math.random() * 2.5}px`;
-            star.style.height = star.style.width;
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.top = `${Math.random() * 100}%`;
-            starsBg.appendChild(star);
+    // Matrix characters pool
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>[]{}/+=*!@#$%^&";
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+
+    // Track state of down streams arrays
+    const rainDrops = [];
+    for (let x = 0; x < columns; x++) {
+        rainDrops[x] = Math.random() * -100; // staggered drop positions
+    }
+
+    function drawStream() {
+        ctx.fillStyle = 'rgba(2, 6, 23, 0.05)'; // slight trail fade overlay
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#00f2fe'; // Neon cyan style drop color
+        ctx.font = fontSize + 'px monospace';
+
+        for (let i = 0; i < rainDrops.length; i++) {
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+
+            if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                rainDrops[i] = 0;
+            }
+            rainDrops[i]++;
         }
     }
+    setInterval(drawStream, 33);
+}
 
-    // --- 2. 📱 MOBILE FLOW WITH SLIDE-UP EFFECTS ---
-    if (window.innerWidth <= 768) {
-        panels.forEach((panel, i) => {
-            const innerCard = panel.querySelector('.content');
-            gsap.set(innerCard, { opacity: 0, y: 50 });
+// --- 2. SMOOTH SECTION SELECT LINK SCROLLS ---
+function scrollToSection(id) {
+    const element = document.getElementById(id);
+    if (element) {
+        const offset = 80; // height buffer for top bar header
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
 
-            gsap.to(innerCard, {
-                opacity: 1,
-                y: 0,
-                duration: 0.7,
-                scrollTrigger: {
-                    trigger: panel,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-
-            ScrollTrigger.create({
-                trigger: panel,
-                start: "top center",
-                end: "bottom center",
-                onToggle: self => {
-                    if (self.isActive) {
-                        navButtons.forEach((btn, idx) => {
-                            if (idx === i) btn.classList.add('active');
-                            else btn.classList.remove('active');
-                        });
-                    }
-                }
-            });
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
         });
-
-        navButtons.forEach((button) => {
-            button.addEventListener('click', () => {
-                const targetIndex = parseInt(button.getAttribute('data-index'));
-                const targetPanel = panels[targetIndex];
-                if (targetPanel) {
-                    targetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        return; 
     }
+}
 
-    // --- 3. 💻 DESKTOP PURE HORIZONTAL SIDE-SLIDING TRACK ANIMATION ---
-    // Calculates horizontal transform amount based on number of sections dynamically
-    const totalPanels = panels.length;
+// --- 3. SCROLLING VIEW ACTIVE TRIGGER CHECKS ---
+function handleNavbarHighlights() {
+    const sections = document.querySelectorAll('.portfolio-section');
+    const navButtons = document.querySelectorAll('.nav-btn');
+
+    let currentSectionId = "";
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120; // threshold marker matching padding heights
+        if (window.scrollY >= sectionTop) {
+            currentSectionId = section.getAttribute('id');
+        }
+    });
+
+    navButtons.forEach(btn => {
+        btn.classList.remove('active');
+        // Extract string targets inside custom inline attributes safely
+        if (btn.getAttribute('onclick').includes(currentSectionId)) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// --- 4. VANILLA INTERSECTION OBSERVER FOR ARRANGING SKILLS/CARDS ON SCROLL ---
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
     
-    // Virtual Scroll Setup: Creates dynamic track height on body to capture vertical scrolls
-    document.body.style.height = `${(totalPanels) * 100}vh`;
+    const observerOptions = {
+        root: null,
+        threshold: 0.1, // Element enters 10% inside viewport
+        rootMargin: "0px 0px -50px 0px"
+    };
 
-    gsap.to(space, {
-        x: () => -(space.scrollWidth - window.innerWidth),
-        ease: "none",
-        scrollTrigger: {
-            trigger: "body",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 1, // Smooth scrolling anchor translate
-            pin: ".container",
-            invalidateOnRefresh: true
-        }
-    });
-
-    // --- 4. NAVIGATION SYNCHRONIZATION (DESKTOP) ---
-    function setActiveNav(index) {
-        navButtons.forEach((btn, i) => {
-            if (i === index) btn.classList.add('active');
-            else btn.classList.remove('active');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // If this is the language blocks container, staggered cascade triggers
+                const skillBlocks = entry.target.querySelectorAll('.skill-block');
+                if(skillBlocks.length > 0) {
+                    skillBlocks.forEach((block, idx) => {
+                        setTimeout(() => {
+                            block.style.opacity = '1';
+                            block.style.transform = 'translateY(0)';
+                        }, idx * 60); // Clean 60ms delay waterfall cascade effect
+                    });
+                }
+                observer.unobserve(entry.target); // Trigger logic once safely
+            }
         });
-    }
+    }, observerOptions);
 
-    panels.forEach((_, i) => {
-        ScrollTrigger.create({
-            trigger: "body",
-            start: () => `top+=${(i * (document.documentElement.scrollHeight - window.innerHeight) / (totalPanels - 1)) - 50} top`,
-            end: () => `top+=${((i + 1) * (document.documentElement.scrollHeight - window.innerHeight) / (totalPanels - 1)) - 50} top`,
-            onToggle: self => { if (self.isActive) setActiveNav(i); }
-        });
+    animatedElements.forEach(el => {
+        observer.observe(el);
     });
+}
 
-    // --- 5. SIDEBAR CLICKS LINK TRANSITION (DESKTOP) ---
-    navButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            const targetIndex = parseInt(button.getAttribute('data-index'));
-            const totalScrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const targetScrollPos = (targetIndex / (totalPanels - 1)) * totalScrollHeight;
-
-            window.scrollTo({
-                top: targetScrollPos,
-                behavior: 'smooth'
-            });
-        });
-    });
+// RUN CONTROLLER PACKETS ON DOM LOADED
+window.addEventListener('DOMContentLoaded', () => {
+    initMatrixBackground();
+    initScrollAnimations();
+    
+    // Bind global listener loops safely
+    window.addEventListener('scroll', handleNavbarHighlights);
 });
