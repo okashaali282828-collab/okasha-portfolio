@@ -7,7 +7,7 @@
 }
 
 body {
-    background: #212428; /* Premium Dark Background from reference design */
+    background: #212428; 
     color: #c4cfde;
     overflow-x: hidden;
     position: relative;
@@ -20,11 +20,11 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 1;
-    opacity: 0.05; /* Soft matrix backdrop overlay */
+    opacity: 0.05; 
     pointer-events: none;
 }
 
-/* ⚡ TOP NAVIGATION BAR (CLEAN & FLAT STYLE) */
+/* ⚡ TOP NAVIGATION BAR */
 .top-nav {
     position: fixed;
     top: 0;
@@ -68,7 +68,7 @@ body {
 }
 
 .nav-btn:hover, .nav-btn.active {
-    color: #ff014f; /* Premium Pink Accent */
+    color: #ff014f; 
     background: rgba(255, 1, 79, 0.05);
 }
 
@@ -112,32 +112,74 @@ body {
     display: block;
 }
 
-/* 🖼️ HERO SECTION UPGRADE (MATCHING IMAGE_0D0528 IMAGE LAYOUT) */
-.profile-card {
+/* 🖼️ HERO FLEX LAYOUT (FIXED FOR UPPER ALIGNMENT AND PROPER PARAGRAPH WIDTH) */
+.hero-flex-layout {
     display: flex;
-    flex-direction: row-reverse; /* Pushes image right, text left */
-    align-items: center;
+    flex-direction: row; 
+    align-items: flex-start; /* Picture & Name are perfectly aligned to top */
     justify-content: space-between;
-    gap: 50px;
-    text-align: left !important;
+    gap: 40px;
+    width: 100%;
+}
+
+.hero-left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.hero-left-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+/* Tagline directly under the name in Premium Pink */
+.profile-card .subtitle, .hero-left-content .subtitle {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ff014f;
+    font-weight: 600;
+    margin-bottom: 25px;
+    display: block;
+}
+
+/* ABOUT TEXT BOX TRANSFORMS INTO A BEAUTIFUL HORIZONTAL PARAGRAPH */
+.about-text-box {
     background: transparent !important;
     border: none !important;
-    box-shadow: none !important;
     padding: 0 !important;
+    margin-top: 5px;
+    width: 100%;
+    max-width: 720px; /* Full paragraph flow width */
+}
+
+.about-text-box p {
+    font-size: 1.1rem;
+    color: #878e99;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.hero-right-image {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .profile-img-container {
-    width: 380px;
-    height: 380px;
+    width: 360px;
+    height: 360px;
     border-radius: 50%;
-    background: #ff014f; /* Premium Pink Circle Background from reference image */
-    padding: 0;
+    background: #ff014f; 
     overflow: hidden;
-    flex-shrink: 0;
-    box-shadow: 10px 10px 30px rgba(0,0,0,0.5), -10px -10px 30px rgba(255,255,255,0.03);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.4), -10px -10px 30px rgba(255,255,255,0.02);
 }
 
 .profile-img {
@@ -146,44 +188,7 @@ body {
     object-fit: cover;
 }
 
-/* LEFT CONTENT HERO TEXTS */
-.profile-card h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1.2;
-    margin-bottom: 15px;
-}
-
-/* Highlighting Name in Accent Pink */
-.profile-card h1::character-variant {
-    color: #ffffff;
-}
-
-.profile-card .subtitle {
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #ff014f;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-.about-text-box {
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    margin-top: 15px;
-    max-width: 650px;
-}
-
-.about-text-box p {
-    font-size: 1.1rem;
-    color: #878e99;
-    line-height: 1.8;
-}
-
-/* GENERAL SECTION CARDS (FROSTED FLAT GLASS BOX SHADOWS) */
+/* GENERAL SECTION CARDS */
 .content-card {
     width: 100%;
     background: #212428;
@@ -220,7 +225,7 @@ p { font-size: 1rem; color: #878e99; line-height: 1.6; }
 .edu-place { color: #ff014f; font-weight: 500; margin-bottom: 4px; }
 .edu-meta { font-size: 0.9rem; color: #7c838e; }
 
-/* ALL GRID BOXES (100% PURE TRANSPARENT WITH COMFORTABLE NEUMORPHIC CONTOURS) */
+/* ALL GRID BOXES (TRANSPARENT) */
 .grid-layout { 
     display: grid; 
     grid-template-columns: repeat(2, 1fr); 
@@ -250,7 +255,7 @@ p { font-size: 1rem; color: #878e99; line-height: 1.6; }
 .project-techs { display: flex; flex-wrap: wrap; gap: 8px; }
 .project-techs span { background: #1e2024; color: #c4cfde; padding: 5px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 500; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
 
-/* 🟦 COMPUTER LANGUAGES FLEX BOXES (TRANSPARENT NEUMORPHIC CHIPS) */
+/* COMPUTER LANGUAGES CHIPS */
 .skills-flex { display: flex; flex-wrap: wrap; gap: 15px; }
 .skill-block {
     background: transparent !important; 
@@ -272,7 +277,7 @@ p { font-size: 1rem; color: #878e99; line-height: 1.6; }
     transform: translateY(-3px);
 }
 
-/* ORIGINAL BRAND COLORS RETAINED PERFECTLY */
+/* ORIGINAL BRAND COLORS */
 .brand-java { color: #ea2d2e !important; }
 .brand-cpp { color: #00599c !important; }
 .brand-python { color: #ffd43b !important; }
@@ -281,9 +286,8 @@ p { font-size: 1rem; color: #878e99; line-height: 1.6; }
 .brand-js { color: #f7df1e !important; }
 .brand-sql { color: #00758f !important; }
 
-/* SKILL BOX METADATA ICONS ACCENT TEXTURE */
 .skill-detail-box h4 { display: flex; align-items: center; gap: 12px; color: #ffffff !important; margin-bottom: 12px; font-size: 1.2rem; font-weight: 600; }
-.skill-detail-box h4 i { color: #ff014f !important; } /* All technical indicators styled pink */
+.skill-detail-box h4 i { color: #ff014f !important; } 
 .skill-detail-box p { font-size: 0.95rem; color: #878e99; }
 
 /* SERVICES GRID STYLING */
@@ -300,7 +304,7 @@ p { font-size: 1rem; color: #878e99; line-height: 1.6; }
 .service-card-box h4 { font-size: 1.25rem; color: #ffffff; margin-bottom: 12px; font-weight: 600; }
 .service-card-box p { font-size: 0.95rem; color: #878e99; }
 
-/* CONTACT SECTION CONNECTIONS STACK */
+/* CONTACT */
 .contact-desc { text-align: center; margin-bottom: 30px; font-size: 1.1rem; }
 .contact-links-stack { display: flex; flex-direction: column; gap: 15px; max-width: 550px; margin: 0 auto; }
 .contact-tile {
@@ -325,19 +329,20 @@ p { font-size: 1rem; color: #878e99; line-height: 1.6; }
     transform: translateX(4px);
 }
 
-/* MOBILE RESPONSIVENESS AND TABLET HOOKS */
+/* RESPONSIVE DESIGN ADJUSTMENTS */
 @media screen and (max-width: 992px) {
-    .profile-card {
-        flex-direction: column;
-        text-align: center !important;
+    .hero-flex-layout {
+        flex-direction: column-reverse; 
+        align-items: center;
+        text-align: center;
         gap: 30px;
     }
-    .profile-img-container {
-        width: 280px;
-        height: 280px;
+    .hero-left-content {
+        align-items: center;
     }
-    .profile-card h1 { font-size: 2.5rem; }
-    .about-text-box { text-align: center; }
+    .hero-left-content h1 { font-size: 2.8rem; text-align: center; }
+    .about-text-box p { text-align: center; }
+    .profile-img-container { width: 280px; height: 280px; }
 }
 
 @media screen and (max-width: 768px) {
