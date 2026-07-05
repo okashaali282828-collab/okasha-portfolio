@@ -4,34 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muhammad Okasha - Portfolio</title>
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Developer Digital Rain Background Canvas -->
     <canvas id="bg-canvas"></canvas>
 
-    <!-- ⚡ TOP NAVIGATION BAR -->
     <header class="top-nav">
         <div class="nav-links">
             <button class="nav-btn active" onclick="scrollToSection('intro')"><i class="fas fa-user"></i> <span>Intro</span></button>
             <button class="nav-btn" onclick="scrollToSection('education')"><i class="fas fa-graduation-cap"></i> <span>Education</span></button>
             <button class="nav-btn" onclick="scrollToSection('projects')"><i class="fas fa-project-diagram"></i> <span>Projects</span></button>
-            <button class="nav-btn" onclick="scrollToSection('core-skills')"><i class="fas fa-code"></i> <span>Languages</span></button>
+            <button class="nav-btn" onclick="scrollToSection('skills-section')"><i class="fas fa-code"></i> <span>Skills</span></button>
+            <button class="nav-btn" onclick="scrollToSection('services')"><i class="fas fa-laptop-code"></i> <span>Services</span></button>
             <button class="nav-btn" onclick="scrollToSection('contact')"><i class="fas fa-envelope"></i> <span>Contact</span></button>
         </div>
         <a href="Muhammad_Okasha_CV.pdf" class="nav-cv-btn" download><i class="fas fa-file-pdf"></i> CV</a>
     </header>
 
-    <!-- MAIN PORTFOLIO BODY WRAPPER -->
     <main class="main-container">
 
-        <!-- SECTION 1: Introduction -->
         <section id="intro" class="portfolio-section">
             <div class="content-card profile-card">
                 <div class="profile-img-container">
@@ -45,7 +39,6 @@
             </div>
         </section>
 
-        <!-- SECTION 2: Education -->
         <section id="education" class="portfolio-section">
             <div class="content-card">
                 <h2><i class="fas fa-graduation-cap"></i> Education Details</h2>
@@ -70,13 +63,11 @@
             </div>
         </section>
 
-        <!-- SECTION 3: Projects (Updated with Real CV Content) -->
         <section id="projects" class="portfolio-section">
             <div class="content-card">
                 <h2><i class="fas fa-project-diagram"></i> Featured Projects</h2>
                 <div class="grid-layout">
                     
-                    <!-- Project 1 -->
                     <div class="grid-box full-width-box">
                         <div class="box-header">
                             <i class="fas fa-running project-icon-ai"></i> 
@@ -94,13 +85,12 @@
                         </div>
                     </div>
 
-                    <!-- Project 2 -->
                     <div class="grid-box">
                         <div class="box-header">
                             <i class="fas fa-cloud-showers-heavy project-icon-net"></i> 
                             <h3>Smart Flood Detection System</h3>
                         </div>
-                        <p class="project-date">Computer Networks Course Project (CSC275)</p>
+                        <p class="project-date">Computer Networks Course Project (CSC275) | May 2026 – Jun 2026</p>
                         <ul class="project-bullets">
                             <li>Simulated a full IoT-based flood monitoring system using Cisco Packet Tracer.</li>
                             <li>Built an HTML/JS dashboard (Chart.js) featuring live sensor readings and ML-based flood forecasting.</li>
@@ -108,13 +98,12 @@
                         </ul>
                     </div>
 
-                    <!-- Project 3 -->
                     <div class="grid-box">
                         <div class="box-header">
                             <i class="fas fa-brain project-icon-research"></i> 
                             <h3>AI/ML Research Presentation</h3>
                         </div>
-                        <p class="project-date">Artificial Intelligence Course</p>
+                        <p class="project-date">Artificial Intelligence Course | Mar 2026 – May 2026</p>
                         <ul class="project-bullets">
                             <li>Led a 33-slide research deck on AI Foundations, ML paradigms, and mathematical formulations (Bellman equations, Q-Learning).</li>
                             <li>Presented concepts using real-world applications, diagrams, and bilingual explanations.</li>
@@ -125,8 +114,7 @@
             </div>
         </section>
 
-        <!-- SECTION 4: Computer Languages -->
-        <section id="core-skills" class="portfolio-section">
+        <section id="skills-section" class="portfolio-section">
             <div class="content-card">
                 <h2><i class="fas fa-code"></i> Computer Languages</h2>
                 <div class="skills-flex">
@@ -138,10 +126,52 @@
                     <div class="skill-block"><i class="fab fa-js brand-js"></i> JavaScript</div>
                     <div class="skill-block"><i class="fas fa-database brand-sql"></i> SQL</div>
                 </div>
+
+                <h2 class="sub-heading-skills"><i class="fas fa-tools"></i> Technical & Core Skills</h2>
+                <div class="grid-layout format-skills-grid">
+                    <div class="grid-box skill-detail-box">
+                        <h4><i class="fas fa-brain"></i> Machine Learning</h4>
+                        <p>Supervised/Unsupervised learning paradigms, model evaluation, and predictive insights.</p>
+                    </div>
+                    <div class="grid-box skill-detail-box">
+                        <h4><i class="fas fa-eye"></i> Computer Vision</h4>
+                        <p>Real-time landmark tracking, object segmentation, and framework solutions using OpenCV & MediaPipe.</p>
+                    </div>
+                    <div class="grid-box skill-detail-box">
+                        <h4><i class="fas fa-network-wired"></i> Computer Networking</h4>
+                        <p>Routing protocols (OSPF, BGP), subnetting, topology builds, and network architecture configuration.</p>
+                    </div>
+                    <div class="grid-box skill-detail-box">
+                        <h4><i class="fas fa-database"></i> Database Management</h4>
+                        <p>Relational schema layouts, clean optimized SQL queries, indexing, and structural engineering lifecycle.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SECTION 5: Contact Us -->
+        <section id="services" class="portfolio-section">
+            <div class="content-card">
+                <h2><i class="fas fa-laptop-code"></i> Professional Services</h2>
+                <div class="services-grid">
+                    <div class="grid-box service-card-box">
+                        <i class="fas fa-desktop"></i>
+                        <h4>Software Development</h4>
+                        <p>Developing structural desktop utilities, procedural scripts, and clean architectural core programs using Java and C++.</p>
+                    </div>
+                    <div class="grid-box service-card-box">
+                        <i class="fas fa-robot"></i>
+                        <h4>AI & Computer Vision Solutions</h4>
+                        <p>Designing real-time intelligent monitoring structures, predictive metrics models, and custom image processing blocks.</p>
+                    </div>
+                    <div class="grid-box service-card-box">
+                        <i class="fas fa-server"></i>
+                        <h4>Network Architecture Simulation</h4>
+                        <p>Building functional business topologies, setting active routing protocols, and testing communication node streams.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="contact" class="portfolio-section">
             <div class="content-card">
                 <h2><i class="fas fa-envelope"></i> Let's Connect</h2>
