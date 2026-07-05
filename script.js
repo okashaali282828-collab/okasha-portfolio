@@ -5,13 +5,13 @@ window.addEventListener('DOMContentLoaded', () => {
     const panels = gsap.utils.toArray('.panel');
     const navButtons = gsap.utils.toArray('.nav-btn');
 
-    // --- 1. DYNAMIC STARS BACKGROUND ---
+    // --- 1. STARS BACKGROUND CREATION ---
     const starsBg = document.getElementById('stars-bg');
     if(starsBg) {
-        for (let i = 0; i < 60; i++) {
+        for (let i = 0; i < 50; i++) {
             const star = document.createElement('div');
             star.classList.add('star');
-            star.style.width = `${Math.random() * 3}px`;
+            star.style.width = `${Math.random() * 2.5}px`;
             star.style.height = star.style.width;
             star.style.left = `${Math.random() * 100}%`;
             star.style.top = `${Math.random() * 100}%`;
@@ -19,29 +19,23 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- 2. 📱 MOBILE SMOOTH SLIDE-UP ANIMATIONS ---
+    // --- 2. 📱 MOBILE FLOW WITH SLIDE-UP EFFECTS ---
     if (window.innerWidth <= 768) {
         panels.forEach((panel, i) => {
-            const contentCard = panel.querySelector('.content');
-            
-            // Set initial state for mobile entry animation
-            gsap.set(contentCard, { opacity: 0, y: 60 });
+            const innerCard = panel.querySelector('.content');
+            gsap.set(innerCard, { opacity: 0, y: 50 });
 
-            // Create scroll triggers for each individual card on mobile
-            gsap.to(contentCard, {
+            gsap.to(innerCard, {
                 opacity: 1,
                 y: 0,
-                duration: 0.8,
-                ease: "power2.out",
+                duration: 0.7,
                 scrollTrigger: {
                     trigger: panel,
-                    start: "top 85%", 
-                    end: "bottom 15%",
+                    start: "top 85%",
                     toggleActions: "play none none reverse"
                 }
             });
 
-            // Toggle active classes on bottom nav buttons while scrolling mobile view
             ScrollTrigger.create({
                 trigger: panel,
                 start: "top center",
@@ -57,58 +51,41 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Click transitions on mobile bottom navbar links
         navButtons.forEach((button) => {
             button.addEventListener('click', () => {
                 const targetIndex = parseInt(button.getAttribute('data-index'));
                 const targetPanel = panels[targetIndex];
                 if (targetPanel) {
-                    targetPanel.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    targetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        return; // Stops here for mobile, rest is desktop logic
+        return; 
     }
 
-    // --- 3. 💻 DESKTOP 3D VIEWPORT INITIALIZATION ---
-    panels.forEach((panel, i) => {
-        if (i === 0) {
-            gsap.set(panel, { opacity: 1, z: 0, rotationY: 0 });
-        } else {
-            gsap.set(panel, { 
-                opacity: 0, 
-                z: -i * 2000, 
-                rotationY: i % 2 === 0 ? 30 : -30 
-            });
-        }
-    });
+    // --- 3. 💻 DESKTOP PURE HORIZONTAL SIDE-SLIDING TRACK ANIMATION ---
+    // Calculates horizontal transform amount based on number of sections dynamically
+    const totalPanels = panels.length;
+    
+    // Virtual Scroll Setup: Creates dynamic track height on body to capture vertical scrolls
+    document.body.style.height = `${(totalPanels) * 100}vh`;
 
-    // --- 4. DESKTOP 3D SCROLL TIMELINE ---
-    const tl = gsap.timeline({
+    gsap.to(space, {
+        x: () => -(space.scrollWidth - window.innerWidth),
+        ease: "none",
         scrollTrigger: {
             trigger: "body",
             start: "top top",
             end: "bottom bottom",
-            scrub: 1.5,
+            scrub: 1, // Smooth scrolling anchor translate
             pin: ".container",
             invalidateOnRefresh: true
         }
     });
 
-    panels.forEach((panel, i) => {
-        if (i > 0) {
-            const prevPanel = panels[i - 1];
-            tl.to(prevPanel, { opacity: 0, z: 1200, rotationY: i % 2 === 0 ? -45 : 45, duration: 1 }, i - 0.4)
-              .to(panel, { opacity: 1, z: 0, rotationY: 0, duration: 1 }, i - 0.4);
-        }
-    });
-
-    // --- 5. DESKTOP SIDEBAR STATE UPDATE ---
-    function updateNav(index) {
+    // --- 4. NAVIGATION SYNCHRONIZATION (DESKTOP) ---
+    function setActiveNav(index) {
         navButtons.forEach((btn, i) => {
             if (i === index) btn.classList.add('active');
             else btn.classList.remove('active');
@@ -118,18 +95,18 @@ window.addEventListener('DOMContentLoaded', () => {
     panels.forEach((_, i) => {
         ScrollTrigger.create({
             trigger: "body",
-            start: () => `top+=${(i * (document.documentElement.scrollHeight - window.innerHeight) / (panels.length - 1)) - 100} top`,
-            end: () => `top+=${((i + 1) * (document.documentElement.scrollHeight - window.innerHeight) / (panels.length - 1)) - 100} top`,
-            onToggle: self => { if (self.isActive) updateNav(i); }
+            start: () => `top+=${(i * (document.documentElement.scrollHeight - window.innerHeight) / (totalPanels - 1)) - 50} top`,
+            end: () => `top+=${((i + 1) * (document.documentElement.scrollHeight - window.innerHeight) / (totalPanels - 1)) - 50} top`,
+            onToggle: self => { if (self.isActive) setActiveNav(i); }
         });
     });
 
-    // --- 6. DESKTOP SIDEBAR CLICK LOGIC ---
+    // --- 5. SIDEBAR CLICKS LINK TRANSITION (DESKTOP) ---
     navButtons.forEach((button) => {
         button.addEventListener('click', () => {
             const targetIndex = parseInt(button.getAttribute('data-index'));
             const totalScrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const targetScrollPos = (targetIndex / (panels.length - 1)) * totalScrollHeight;
+            const targetScrollPos = (targetIndex / (totalPanels - 1)) * totalScrollHeight;
 
             window.scrollTo({
                 top: targetScrollPos,
