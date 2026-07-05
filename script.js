@@ -1,20 +1,22 @@
-// 🎥 INTERSECTION OBSERVER FOR VIDEO-EDIT REVEAL TRANSITIONS
 document.addEventListener("DOMContentLoaded", function () {
     const sections = document.querySelectorAll(".portfolio-section");
+    const navButtons = document.querySelectorAll(".nav-btn");
 
+    // 🎥 INTERSECTION OBSERVER FOR NATURAL VIDEO SNAP ENTRANCE
     const observerOptions = {
         root: null,
-        threshold: 0.15, // Replays transition beautifully when 15% is on screen
-        rootMargin: "0px 0px -100px 0px"
+        threshold: 0.12, // Trigged calculation matrix
+        rootMargin: "0px 0px -10% 0px"
     };
 
-    const sectionObserver = new IntersectionObserver(function (entries, observer) {
+    const sectionObserver = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("video-reveal-active");
-            } else {
-                // Smoothly un-reveals to replay when user clicks navigation menu
-                entry.target.classList.remove("video-reveal-active");
+                
+                // 🔄 DYNAMIC SCROLL SPY: Automatically highlights top bar button on scroll
+                const currentId = entry.target.getAttribute("id");
+                updateActiveNavbarButton(currentId);
             }
         });
     }, observerOptions);
@@ -22,20 +24,34 @@ document.addEventListener("DOMContentLoaded", function () {
     sections.forEach(section => {
         sectionObserver.observe(section);
     });
+
+    // Function to handle navbar styling shifts safely
+    function updateActiveNavbarButton(activeSectionId) {
+        if (!activeSectionId) return;
+        
+        navButtons.forEach(btn => {
+            btn.classList.remove("active");
+            
+            // Extracts matching targets from custom onclick tags safely
+            const clickAttr = btn.getAttribute("onclick") || "";
+            if (clickAttr.includes(`'${activeSectionId}'`) || clickAttr.includes(`"${activeSectionId}"`)) {
+                btn.classList.add("active");
+            }
+        });
+    }
 });
 
-// ⚡ HIGH VELOCITY INTERACTIVE SMOOTH SCROLLER LINKED ON BUTTON CLICKS
+// ⚡ HIGH VELOCITY SAFE INTERACTIVE SCROLLER
 function scrollToSection(sectionId) {
     const targetedElement = document.getElementById(sectionId);
     if (targetedElement) {
-        // Clear focus first to trigger smooth snap re-entry animation instantly
-        targetedElement.classList.remove("video-reveal-active");
+        // Ensures element stays visible during the transition track to fix lag/black frame glitch
+        targetedElement.classList.add("video-reveal-active");
         
-        setTimeout(() => {
-            targetedElement.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-        }, 50);
+        // Pure smooth hardware transition tracking
+        targetedElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
     }
 }
