@@ -1,7 +1,4 @@
-// Pure DOM ke load hone ka wait karte hain taake koi element miss na ho
 window.addEventListener('DOMContentLoaded', () => {
-    
-    // GSAP ScrollTrigger plugin ko register karte hain
     gsap.registerPlugin(ScrollTrigger);
 
     const space = document.querySelector('.space-3d');
@@ -9,7 +6,6 @@ window.addEventListener('DOMContentLoaded', () => {
     const navButtons = gsap.utils.toArray('.nav-btn');
 
     // --- 1. DYNAMIC STARS BACKGROUND ---
-    // Background me floating stars generate karne ka loop
     const starsBg = document.getElementById('stars-bg');
     if(starsBg) {
         for (let i = 0; i < 60; i++) {
@@ -23,26 +19,29 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- 2. MOBILE CHECK & RESETS ---
-    // Agar mobile screen (768px se choti) ho toh 3D space animations ko disable kar do
+    // --- 2. 📱 MOBILE SMOOTH SLIDE-UP ANIMATIONS ---
     if (window.innerWidth <= 768) {
-        // Mobile par buttons click karne se smoothly scrolling ka logic
-        navButtons.forEach((button) => {
-            button.addEventListener('click', () => {
-                const targetIndex = parseInt(button.getAttribute('data-index'));
-                const targetPanel = panels[targetIndex];
-                
-                if (targetPanel) {
-                    targetPanel.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        panels.forEach((panel, i) => {
+            const contentCard = panel.querySelector('.content');
+            
+            // Set initial state for mobile entry animation
+            gsap.set(contentCard, { opacity: 0, y: 60 });
+
+            // Create scroll triggers for each individual card on mobile
+            gsap.to(contentCard, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: panel,
+                    start: "top 85%", 
+                    end: "bottom 15%",
+                    toggleActions: "play none none reverse"
                 }
             });
-        });
 
-        // Mobile par automatic active navigation class switch karna
-        panels.forEach((panel, i) => {
+            // Toggle active classes on bottom nav buttons while scrolling mobile view
             ScrollTrigger.create({
                 trigger: panel,
                 start: "top center",
@@ -58,13 +57,24 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Mobile check complete, baqi desktop ka 3D logic execute nahi hoga
-        return; 
+        // Click transitions on mobile bottom navbar links
+        navButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const targetIndex = parseInt(button.getAttribute('data-index'));
+                const targetPanel = panels[targetIndex];
+                if (targetPanel) {
+                    targetPanel.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        return; // Stops here for mobile, rest is desktop logic
     }
 
-
-    // --- 3. DESKTOP 3D INITIALIZATION ---
-    // Desktop par saare panels ko 3D space me peeche (z-axis par) push karna
+    // --- 3. 💻 DESKTOP 3D VIEWPORT INITIALIZATION ---
     panels.forEach((panel, i) => {
         if (i === 0) {
             gsap.set(panel, { opacity: 1, z: 0, rotationY: 0 });
@@ -77,14 +87,13 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 4. DESKTOP GSAP TIMELINE LOGIC ---
-    // Scroll karne par camera moving effect generate karna
+    // --- 4. DESKTOP 3D SCROLL TIMELINE ---
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: "body",
             start: "top top",
             end: "bottom bottom",
-            scrub: 1.5, // Buttery smooth scroll translation
+            scrub: 1.5,
             pin: ".container",
             invalidateOnRefresh: true
         }
@@ -98,8 +107,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 5. DESKTOP NAVIGATION SYNCHRONIZATION ---
-    // Scroll ke mutabiq navigation buttons ke active state ko badalna
+    // --- 5. DESKTOP SIDEBAR STATE UPDATE ---
     function updateNav(index) {
         navButtons.forEach((btn, i) => {
             if (i === index) btn.classList.add('active');
@@ -116,8 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 6. DESKTOP SIDEBAR BUTTON CLICK LOGIC ---
-    // Button par click karne se specific 3D layer/section par jump karna
+    // --- 6. DESKTOP SIDEBAR CLICK LOGIC ---
     navButtons.forEach((button) => {
         button.addEventListener('click', () => {
             const targetIndex = parseInt(button.getAttribute('data-index'));
