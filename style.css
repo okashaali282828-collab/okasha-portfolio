@@ -112,13 +112,13 @@ body {
     display: block;
 }
 
-/* 🖼️ HERO FLEX LAYOUT (PICTURE ON LEFT, TEXTS ON RIGHT SIDE PERFECTLY OPPOSITE) */
+/* 🖼️ HERO FLEX LAYOUT (PERFECT FIXED: PICTURE ON LEFT, TEXTS ON RIGHT) */
 .hero-flex-layout {
     display: flex;
-    flex-direction: row-reverse; /* Puts image section first on left, content second on right */
+    flex-direction: row; /* Picture left, text right */
     align-items: center; 
-    justify-content: flex-end;
-    gap: 50px;
+    justify-content: flex-start;
+    gap: 60px;
     width: 100%;
 }
 
