@@ -13,174 +13,158 @@
 </head>
 <body>
 
-    <!-- Stars Animation Background -->
-    <div class="stars-background" id="stars-bg"></div>
+    <!-- Developer Digital Rain Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
 
-    <!-- Modern Sidebar Navigation -->
-    <nav class="sidebar">
-        <button class="nav-btn active" data-index="0"><i class="fas fa-user"></i><span>About</span></button>
-        <button class="nav-btn" data-index="1"><i class="fas fa-laptop-code"></i><span>Skills</span></button>
-        <button class="nav-btn" data-index="2"><i class="fas fa-briefcase"></i><span>Experience</span></button>
-        <button class="nav-btn" data-index="3"><i class="fas fa-graduation-cap"></i><span>Education</span></button>
-        <button class="nav-btn" data-index="4"><i class="fas fa-trophy"></i><span>Achievements</span></button>
-        <button class="nav-btn" data-index="5"><i class="fas fa-project-diagram"></i><span>Projects</span></button>
-        <button class="nav-btn" data-index="6"><i class="fas fa-envelope"></i><span>Contact</span></button>
-    </nav>
+    <!-- ⚡ TOP NAVIGATION BAR -->
+    <header class="top-nav">
+        <div class="nav-links">
+            <button class="nav-btn active" onclick="scrollToSection('intro')"><i class="fas fa-user"></i> <span>Intro</span></button>
+            <button class="nav-btn" onclick="scrollToSection('education')"><i class="fas fa-graduation-cap"></i> <span>Education</span></button>
+            <button class="nav-btn" onclick="scrollToSection('projects')"><i class="fas fa-project-diagram"></i> <span>Projects</span></button>
+            <button class="nav-btn" onclick="scrollToSection('core-skills')"><i class="fas fa-code"></i> <span>Languages</span></button>
+            <button class="nav-btn" onclick="scrollToSection('tech-skills')"><i class="fas fa-tools"></i> <span>Tech Skills</span></button>
+            <button class="nav-btn" onclick="scrollToSection('services')"><i class="fas fa-laptop-code"></i> <span>Services</span></button>
+            <button class="nav-btn" onclick="scrollToSection('contact')"><i class="fas fa-envelope"></i> <span>Contact</span></button>
+        </div>
+        <a href="your-cv.pdf" class="nav-cv-btn" download><i class="fas fa-file-pdf"></i> CV</a>
+    </header>
 
-    <!-- Main Slide Viewport Container -->
-    <div class="container">
-        <div class="space-3d"> <!-- Acts as our horizontal slider train -->
+    <!-- MAIN PORTFOLIO BODY WRAPPER -->
+    <main class="main-container">
 
-            <!-- PAGE 1: About -->
-            <section class="panel">
-                <div class="content hero-content">
-                    <div class="profile-img-container">
-                        <img src="my-avatar.jpg" alt="Muhammad Okasha" class="profile-img">
+        <!-- SECTION 1: Introduction -->
+        <section id="intro" class="portfolio-section">
+            <div class="content-card profile-card animate-on-scroll">
+                <div class="profile-img-container">
+                    <img src="my-avatar.png" alt="Muhammad Okasha" class="profile-img">
+                </div>
+                <h1>MUHAMMAD OKASHA</h1>
+                <p class="subtitle">Computer Science Student & AI / ML Enthusiast</p>
+                <div class="about-text-box">
+                    <p>Motivated Computer Science student at COMSATS University Islamabad (Sahiwal Campus), currently in the 4th semester of my BS-CS program. I am seeking a summer internship position where I can apply my academic knowledge in software development, networking, and AI to real-world challenges. Eager to contribute, learn rapidly, and grow within a professional technology environment.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Education -->
+        <section id="education" class="portfolio-section">
+            <div class="content-card animate-on-scroll">
+                <h2><i class="fas fa-graduation-cap"></i> Education Details</h2>
+                <div class="education-timeline">
+                    <div class="edu-item highlight">
+                        <span class="edu-badge">Current</span>
+                        <h3>Bachelor of Science in Computer Science (BS-CS)</h3>
+                        <p class="edu-place">COMSATS University Islamabad – Sahiwal Campus</p>
+                        <p class="edu-meta">Semester 4 Completed | Student ID: FA24-BCS-187 | 2024 – Present</p>
                     </div>
-                    <h1>MUHAMMAD OKASHA</h1>
-                    <p class="subtitle">Computer Science Student & AI / ML Enthusiast</p>
-                    <a href="Muhammad_Okasha_CV.pdf" class="cv-btn" download>
-                        <i class="fas fa-file-pdf"></i> Download CV
+                    <div class="edu-item">
+                        <h3>Intermediate (FSc – Pre-Engineering)</h3>
+                        <p class="edu-place">Punjab College Okara</p>
+                        <p class="edu-meta">Percentage / Grade: 70% | 2021 – 2023</p>
+                    </div>
+                    <div class="edu-item">
+                        <h3>Matriculation (SSC – Science)</h3>
+                        <p class="edu-place">Govt. M.C High School Okara</p>
+                        <p class="edu-meta">Percentage / Grade: 85% | 2019 – 2021</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Projects -->
+        <section id="projects" class="portfolio-section">
+            <div class="content-card animate-on-scroll">
+                <h2><i class="fas fa-project-diagram"></i> Featured Projects</h2>
+                <div class="grid-layout projects-grid">
+                    <div class="grid-box project-box">
+                        <div class="box-header"><i class="fas fa-robot"></i> <h3>AI Support Bot</h3></div>
+                        <p>An automation assistant system developed to resolve real-time technical queries using Natural Language Processing models.</p>
+                    </div>
+                    <div class="grid-box project-box">
+                        <div class="box-header"><i class="fas fa-network-wired"></i> <h3>Custom Chat Application</h3></div>
+                        <p>A multi-threaded socket network messaging app utilizing Java OOP architecture and robust exception logging systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Core Computer Languages -->
+        <section id="core-skills" class="portfolio-section">
+            <div class="content-card animate-on-scroll">
+                <h2><i class="fas fa-code"></i> Computer Languages</h2>
+                <div class="skills-flex row-arrange">
+                    <div class="skill-block"><i class="fab fa-java"></i> Java</div>
+                    <div class="skill-block"><i class="fab fa-html5"></i> HTML/CSS</div>
+                    <div class="skill-block"><i class="fab fa-python"></i> Python</div>
+                    <div class="skill-block"><i class="fas fa-database"></i> Database</div>
+                    <div class="skill-block"><i class="fab fa-js"></i> JavaScript</div>
+                    <div class="skill-block"><i class="fab fa-node-js"></i> Node.js</div>
+                    <div class="skill-block"><i class="fas fa-network-wired"></i> Networking</div>
+                    <div class="skill-block"><span class="cplus-font">C++</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Technical Skills -->
+        <section id="tech-skills" class="portfolio-section">
+            <div class="content-card animate-on-scroll">
+                <h2><i class="fas fa-tools"></i> Technical Skills Stack</h2>
+                <div class="grid-layout normal-grid">
+                    <div class="grid-box tech-box">
+                        <i class="fas fa-project-diagram"></i>
+                        <h4>Software Engineering</h4>
+                        <p>Project Management & SDLC Lifecycle Control</p>
+                    </div>
+                    <div class="grid-box tech-box">
+                        <i class="fab fa-meta"></i>
+                        <h4>Meta Ads</h4>
+                        <p>Targeted Performance Marketing & Campaigns Setup</p>
+                    </div>
+                    <div class="grid-box tech-box">
+                        <i class="fab fa-youtube"></i>
+                        <h4>YouTube SEO</h4>
+                        <p>Video Algorithmic Optimization & Content Audit Growth</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: Services -->
+        <section id="services" class="portfolio-section">
+            <div class="content-card animate-on-scroll">
+                <h2><i class="fas fa-laptop-code"></i> Professional Services</h2>
+                <div class="grid-layout services-grid">
+                    <div class="grid-box service-box"><i class="fas fa-code"></i> <h4>Web Development</h4></div>
+                    <div class="grid-box service-box"><i class="fas fa-mobile-alt"></i> <h4>App Development</h4></div>
+                    <div class="grid-box service-box"><i class="fas fa-server"></i> <h4>Database Management</h4></div>
+                    <div class="grid-box service-box"><i class="fas fa-cubes"></i> <h4>Full Stack Development</h4></div>
+                    <div class="grid-box service-box"><i class="fas fa-map-marked-alt"></i> <h4>Local SEO</h4></div>
+                    <div class="grid-box service-box"><i class="fas fa-brain"></i> <h4>AI Integration</h4></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: Contact Us -->
+        <section id="contact" class="portfolio-section">
+            <div class="content-card animate-on-scroll">
+                <h2><i class="fas fa-envelope"></i> Let's Connect</h2>
+                <p class="contact-desc">Feel free to reach out for internship roles, freelance requirements, or academic tech collaborations.</p>
+                <div class="contact-links-stack">
+                    <a href="https://linkedin.com/in/muhammad-okasha" target="_blank" class="contact-tile linkedin">
+                        <i class="fab fa-linkedin"></i> <span>linkedin.com/in/muhammad-okasha</span>
+                    </a>
+                    <a href="mailto:okashalinkedin@gmail.com" class="contact-tile email">
+                        <i class="fas fa-envelope"></i> <span>okashalinkedin@gmail.com</span>
+                    </a>
+                    <a href="https://wa.me/923010392828" target="_blank" class="contact-tile whatsapp">
+                        <i class="fab fa-whatsapp"></i> <span>+92 301 0392828</span>
                     </a>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- PAGE 2: Skills -->
-            <section class="panel">
-                <div class="content">
-                    <h2><i class="fas fa-laptop-code"></i> Skills & Expertise</h2>
-                    <div class="skills-grid">
-                        <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
-                        <span class="skill-tag"><i class="fas fa-brain"></i> Machine Learning</span>
-                        <span class="skill-tag"><i class="fas fa-network-wired"></i> Deep Learning</span>
-                        <span class="skill-tag"><i class="fab fa-html5"></i> HTML / CSS</span>
-                        <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
-                        <span class="skill-tag"><i class="fab fa-git-alt"></i> Git & GitHub</span>
-                    </div>
+    </main>
 
-                    <h3 class="sub-heading">What I Do</h3>
-                    <div class="services-grid-custom">
-                        <div class="service-box">
-                            <i class="fas fa-code"></i>
-                            <h4>Web Dev</h4>
-                        </div>
-                        <div class="service-box">
-                            <i class="fas fa-robot"></i>
-                            <h4>AI Solutions</h4>
-                        </div>
-                        <div class="service-box">
-                            <i class="fas fa-chart-bar"></i>
-                            <h4>Data Science</h4>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PAGE 3: Experience (NEW ✨) -->
-            <section class="panel">
-                <div class="content">
-                    <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <p class="institute">AI Developer Intern</p>
-                            <p class="details">Tech Company | Months 2026 - Present</p>
-                            <p style="font-size:0.9rem; color:#8b949e; margin-top:5px;">Worked on optimization of Machine Learning models and custom dataset preprocessing pipelines.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <p class="institute">Freelance Web Developer</p>
-                            <p class="details">Self-Employed | 2024 - 2025</p>
-                            <p style="font-size:0.9rem; color:#8b949e; margin-top:5px;">Developed highly responsive modern landing pages and portfolio sites using clean frontend code.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PAGE 4: Education -->
-            <section class="panel">
-                <div class="content">
-                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <p class="institute">Bachelor of Computer Science</p>
-                            <p class="details">University Name | 2023 - Present</p>
-                        </div>
-                        <div class="timeline-item">
-                            <p class="institute">Intermediate in Pre-Engineering</p>
-                            <p class="details">College Name | 2021 - 2023</p>
-                        </div>
-                    </div>
-                    
-                    <h3 class="sub-heading">Languages</h3>
-                    <div class="lang-flex">
-                        <span>Urdu (Native)</span>
-                        <span>English (Professional)</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PAGE 5: Achievements (NEW ✨) -->
-            <section class="panel">
-                <div class="content">
-                    <h2><i class="fas fa-trophy"></i> Achievements</h2>
-                    <div class="achievements-container">
-                        <div class="achievement-card">
-                            <i class="fas fa-award"></i>
-                            <div>
-                                <h4>Hackathon Runner Up</h4>
-                                <p>Secured 2nd position in National Level Hackathon for deploying an AI Prototype.</p>
-                            </div>
-                        </div>
-                        <div class="achievement-card">
-                            <i class="fas fa-certificate"></i>
-                            <div>
-                                <h4>Certified ML Specialist</h4>
-                                <p>Successfully completed advanced global certifications in Deep Learning & Neural Networks.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PAGE 6: Projects -->
-            <section class="panel">
-                <div class="content">
-                    <h2><i class="fas fa-project-diagram"></i> Featured Projects</h2>
-                    <div class="projects-container">
-                        <div class="project-card">
-                            <h3>AI Chatbot</h3>
-                            <p>An intelligent AI assistant built using Python and NLP techniques to automate customer support queries.</p>
-                        </div>
-                        <div class="project-card">
-                            <h3>Horizontal Tech Portfolio</h3>
-                            <p>A premium interactive horizontal slide portfolio utilizing advanced GSAP timeline transitions.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PAGE 7: Contact -->
-            <section class="panel">
-                <div class="content">
-                    <h2><i class="fas fa-envelope"></i> Let's Connect</h2>
-                    <p>I am always open to discussing new projects, creative ideas, or opportunities in the AI/ML and Web Development space.</p>
-                    <div class="contact-buttons">
-                        <a href="mailto:your-email@example.com" class="contact-btn email">
-                            <i class="fas fa-envelope"></i> Email Me
-                        </a>
-                        <a href="https://linkedin.com/in/your-username" target="_blank" class="contact-btn linkedin">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-    </div>
-
-    <!-- GSAP Animation Library CDNs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Custom JS -->
-    <script src="script.js"></script>
 </body>
 </html>
