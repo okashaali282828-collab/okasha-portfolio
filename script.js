@@ -44,7 +44,7 @@ function initMatrixBackground() {
 function scrollToSection(id) {
     const element = document.getElementById(id);
     if (element) {
-        const offset = 80; // Navbar fixed height layout buffer
+        const offset = 80; // Navbar fixed height layout offset buffer
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
