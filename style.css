@@ -44,7 +44,10 @@ body {
 .nav-links {
     display: flex;
     gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
 }
+.nav-links::-webkit-scrollbar { display: none; }
 
 .nav-btn {
     background: transparent;
@@ -80,7 +83,6 @@ body {
     font-size: 0.85rem;
     transition: all 0.3s ease;
 }
-
 .nav-cv-btn:hover {
     background: #00f2fe;
     color: #020617;
@@ -132,6 +134,10 @@ h2 {
     padding-bottom: 10px;
 }
 
+.sub-heading-skills {
+    margin-top: 40px;
+}
+
 p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
 .subtitle { color: #38bdf8; font-weight: 500; font-size: 1.1rem; margin-bottom: 20px;}
 
@@ -165,7 +171,7 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
 .edu-item.highlight::before { border-color: #00f2fe; background: #00f2fe; }
 .edu-badge { background: rgba(0, 242, 254, 0.15); color: #00f2fe; font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-bottom: 5px;}
 
-/* 🛠️ PROJECTS LAYOUT STYLING */
+/* PROJECTS GRID */
 .grid-layout { 
     display: grid; 
     grid-template-columns: repeat(2, 1fr); 
@@ -176,6 +182,12 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     padding: 25px;
+    transition: all 0.3s ease;
+}
+.grid-box:hover {
+    border-color: rgba(0, 242, 254, 0.3);
+    background: rgba(0, 242, 254, 0.02);
+    transform: translateY(-3px);
 }
 .full-width-box {
     grid-column: span 2;
@@ -192,12 +204,12 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
 .project-techs { display: flex; flex-wrap: wrap; gap: 8px; }
 .project-techs span { background: rgba(0, 242, 254, 0.1); color: #00f2fe; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 500; }
 
-/* 🟦 COMPACT BLUE COMPUTER LANGUAGES BOXES WITH WHITE TEXT */
-.skills-flex { display: flex; flex-wrap: wrap; gap: 12px; }
+/* 🟦 SKILLS BOXES WITH DEEP BLUE FILL, WHITE TEXT & BRAND ICON COLORS */
+.skills-flex { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
 .skill-block {
-    background: #1e3a8a !important; /* Blue background box */
+    background: #1e3a8a !important; 
     border: 1px solid #3b82f6;
-    color: #ffffff !important; /* Clean White text */
+    color: #ffffff !important; 
     padding: 12px 24px;
     border-radius: 8px;
     font-weight: 600;
@@ -208,7 +220,7 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* 🎨 ORIGINAL BRAND COLORS FOR ICONS */
+/* BRAND COLORS FOR ICONS */
 .brand-java { color: #ea2d2e !important; }
 .brand-cpp { color: #00599c !important; }
 .brand-python { color: #ffd43b !important; }
@@ -217,7 +229,28 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
 .brand-js { color: #f7df1e !important; }
 .brand-sql { color: #00758f !important; }
 
-/* CONTACT TILES LINK STACK */
+/* Technical Skills Detail Grid Boxes */
+.format-skills-grid { margin-top: 15px; }
+.skill-detail-box h4 { display: flex; align-items: center; gap: 8px; color: #38bdf8; margin-bottom: 8px; font-size: 1.1rem; }
+
+/* SERVICES GRID SETUP */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.service-card-box {
+    text-align: center;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.service-card-box i { font-size: 2.2rem; color: #00f2fe; margin-bottom: 15px; }
+.service-card-box h4 { font-size: 1.1rem; color: #f1f5f9; margin-bottom: 10px; font-weight: 600; }
+.service-card-box p { font-size: 0.9rem; }
+
+/* CONTACT */
 .contact-desc { text-align: center; margin-bottom: 25px; }
 .contact-links-stack { display: flex; flex-direction: column; gap: 12px; max-width: 500px; margin: 0 auto; }
 .contact-tile {
@@ -242,14 +275,15 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
 @media screen and (max-width: 768px) {
     .top-nav { padding: 0 10px; height: 60px; }
     .nav-btn span { display: none; }
-    .nav-links { width: 75%; justify-content: space-between; gap: 2px; }
-    .nav-btn { padding: 8px 8px; font-size: 1.1rem; }
+    .nav-links { width: 85%; justify-content: space-between; gap: 2px; overflow-x: auto; }
+    .nav-btn { padding: 8px 6px; font-size: 1rem; }
     .nav-cv-btn { padding: 5px 10px; font-size: 0.8rem; }
     .main-container { padding-top: 85px; gap: 30px; }
     .content-card { padding: 25px 15px; }
     h1 { font-size: 2rem; }
     h2 { font-size: 1.3rem; }
-    .grid-layout { grid-template-columns: 1fr; gap: 15px; }
+    
+    .grid-layout, .services-grid { grid-template-columns: 1fr; gap: 15px; }
     .full-width-box { grid-column: span 1; }
     .skills-flex { justify-content: center; }
     .skill-block { width: 100%; justify-content: flex-start; }
