@@ -24,28 +24,29 @@ body {
     pointer-events: none;
 }
 
-/* ⚡ TOP NAVIGATION */
+/* ⚡ TOP NAVIGATION (STRETCHED & ADAPTED FOR 8 SECTIONS) */
 .top-nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 70px;
-    background: rgba(2, 6, 23, 0.9);
+    background: rgba(2, 6, 23, 0.95);
     border-bottom: 1px solid rgba(0, 242, 254, 0.2);
     backdrop-filter: blur(12px);
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 30px;
+    padding: 0 25px;
 }
 
 .nav-links {
     display: flex;
-    gap: 8px;
+    gap: 4px;
     overflow-x: auto;
     white-space: nowrap;
+    width: 82%;
 }
 .nav-links::-webkit-scrollbar { display: none; }
 
@@ -53,8 +54,8 @@ body {
     background: transparent;
     border: none;
     color: #94a3b8;
-    padding: 8px 14px;
-    font-size: 0.9rem;
+    padding: 8px 12px;
+    font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     display: flex;
@@ -62,6 +63,7 @@ body {
     gap: 6px;
     border-radius: 8px;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .nav-btn:hover, .nav-btn.active {
@@ -73,15 +75,16 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 16px;
+    padding: 6px 14px;
     background: transparent;
     border: 1px solid #00f2fe;
     color: #00f2fe;
     border-radius: 20px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 .nav-cv-btn:hover {
     background: #00f2fe;
@@ -94,7 +97,7 @@ body {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
     padding: 100px 20px 60px 20px;
     display: flex;
@@ -107,13 +110,15 @@ body {
     display: block;
 }
 
+/* frosted transparent cards setup */
 .content-card {
     width: 100%;
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid rgba(0, 242, 254, 0.1);
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid rgba(0, 242, 254, 0.15);
     border-radius: 16px;
     padding: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
 }
 
 h1 {
@@ -130,18 +135,14 @@ h2 {
     display: flex;
     align-items: center;
     gap: 10px;
-    border-bottom: 1px solid rgba(0, 242, 254, 0.1);
+    border-bottom: 1px solid rgba(0, 242, 254, 0.15);
     padding-bottom: 10px;
-}
-
-.sub-heading-skills {
-    margin-top: 40px;
 }
 
 p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
 .subtitle { color: #38bdf8; font-weight: 500; font-size: 1.1rem; margin-bottom: 20px;}
 
-/* PROFILE */
+/* PROFILE HERO */
 .profile-card { text-align: center; }
 .profile-img-container {
     width: 130px;
@@ -152,16 +153,19 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
     overflow: hidden;
 }
 .profile-img { width: 100%; height: 100%; object-fit: cover; }
+
+/* TRANSPARENT BOX FOR PROFILE ABOUT TEXT */
 .about-text-box {
-    background: rgba(2, 6, 23, 0.5);
+    background: transparent !important;
     border-radius: 12px;
     padding: 20px;
-    border-left: 3px solid #00f2fe;
+    border: 1px solid rgba(0, 242, 254, 0.25);
+    border-left: 4px solid #00f2fe;
     text-align: left;
     margin-top: 20px;
 }
 
-/* TIMELINE */
+/* EDUCATION TIMELINE */
 .education-timeline { border-left: 2px solid rgba(0, 242, 254, 0.2); padding-left: 20px; }
 .edu-item { margin-bottom: 30px; position: relative; }
 .edu-item::before {
@@ -171,22 +175,22 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
 .edu-item.highlight::before { border-color: #00f2fe; background: #00f2fe; }
 .edu-badge { background: rgba(0, 242, 254, 0.15); color: #00f2fe; font-size: 0.75rem; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-bottom: 5px;}
 
-/* PROJECTS GRID */
+/* PROJECTS GRID & ALL GENERAL BOXES WITH TRANSPARENT STYLING */
 .grid-layout { 
     display: grid; 
     grid-template-columns: repeat(2, 1fr); 
     gap: 20px; 
 }
 .grid-box {
-    background: rgba(2, 6, 23, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: transparent !important; /* Pure transparent backgrounds on all grids */
+    border: 1px solid rgba(255, 255, 255, 0.12); /* Clean subtle border lines */
     border-radius: 12px;
     padding: 25px;
     transition: all 0.3s ease;
 }
 .grid-box:hover {
-    border-color: rgba(0, 242, 254, 0.3);
-    background: rgba(0, 242, 254, 0.02);
+    border-color: rgba(0, 242, 254, 0.4);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.1);
     transform: translateY(-3px);
 }
 .full-width-box {
@@ -204,12 +208,12 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
 .project-techs { display: flex; flex-wrap: wrap; gap: 8px; }
 .project-techs span { background: rgba(0, 242, 254, 0.1); color: #00f2fe; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 500; }
 
-/* 🟦 SKILLS BOXES WITH DEEP BLUE FILL, WHITE TEXT & BRAND ICON COLORS */
-.skills-flex { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
+/* 🟦 COMPACT BLUE COMPUTER LANGUAGES BOXES (TRANSPARENT BACKGROUND & BLUE BORDERS AS SEEN IN image_0d0528.jpg) */
+.skills-flex { display: flex; flex-wrap: wrap; gap: 12px; }
 .skill-block {
-    background: #1e3a8a !important; 
-    border: 1px solid #3b82f6;
-    color: #ffffff !important; 
+    background: transparent !important; /* Pure Transparent Box Background */
+    border: 1px solid rgba(59, 130, 246, 0.45); /* High-End Blue Tech Border */
+    color: #ffffff !important; /* Pure White interior text */
     padding: 12px 24px;
     border-radius: 8px;
     font-weight: 600;
@@ -217,23 +221,43 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+.skill-block:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.35);
+    transform: translateY(-2px);
 }
 
-/* BRAND COLORS FOR ICONS */
-.brand-java { color: #ea2d2e !important; }
-.brand-cpp { color: #00599c !important; }
-.brand-python { color: #ffd43b !important; }
-.brand-html { color: #e34f26 !important; }
-.brand-css { color: #1572b6 !important; }
-.brand-js { color: #f7df1e !important; }
-.brand-sql { color: #00758f !important; }
+/* 🎨 ORIGINAL BRAND COLORS FOR THE ICONS */
+.brand-java { color: #ea2d2e !important; }     /* Java Red-Orange */
+.brand-cpp { color: #00599c !important; }      /* C++ Blue */
+.brand-python { color: #ffd43b !important; }   /* Python Yellow */
+.brand-html { color: #e34f26 !important; }     /* HTML5 Orange */
+.brand-css { color: #1572b6 !important; }      /* CSS3 Core Blue */
+.brand-js { color: #f7df1e !important; }       /* JavaScript Deep Yellow */
+.brand-sql { color: #00758f !important; }      /* SQL Relational Teal */
 
-/* Technical Skills Detail Grid Boxes */
-.format-skills-grid { margin-top: 15px; }
-.skill-detail-box h4 { display: flex; align-items: center; gap: 8px; color: #38bdf8; margin-bottom: 8px; font-size: 1.1rem; }
+/* CORE SKILLS ICONS ORIGINAL COLORS */
+.brand-ml { color: #a855f7 !important; }
+.brand-cv { color: #3b82f6 !important; }
+.brand-net { color: #10b981 !important; }
+.brand-sql-skill { color: #06b6d4 !important; }
 
-/* SERVICES GRID SETUP */
+/* TECHNICAL SKILLS STACK ORIGINAL COLORS */
+.brand-se { color: #6366f1 !important; }
+.brand-meta { color: #0668e1 !important; }
+.brand-yt { color: #ff0000 !important; }
+
+/* SERVICES ICONS COLORS */
+.brand-sdev { color: #4facfe !important; }
+.brand-aidev { color: #00f2fe !important; }
+
+/* TECHNICAL SKILLS DETAIL TRANSPARENT BOXES */
+.skill-detail-box h4 { display: flex; align-items: center; gap: 10px; color: #ffffff !important; margin-bottom: 8px; font-size: 1.15rem; font-weight: 700; }
+.skill-detail-box h4 i { font-size: 1.3rem; }
+
+/* SERVICES GRID TRANSPARENT CARDS */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -246,8 +270,8 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
     flex-direction: column;
     align-items: center;
 }
-.service-card-box i { font-size: 2.2rem; color: #00f2fe; margin-bottom: 15px; }
-.service-card-box h4 { font-size: 1.1rem; color: #f1f5f9; margin-bottom: 10px; font-weight: 600; }
+.service-card-box i { font-size: 2.2rem; margin-bottom: 15px; }
+.service-card-box h4 { font-size: 1.1rem; color: #ffffff; margin-bottom: 10px; font-weight: 700; }
 .service-card-box p { font-size: 0.9rem; }
 
 /* CONTACT */
@@ -263,8 +287,8 @@ p { font-size: 1rem; color: #94a3b8; line-height: 1.6; }
     font-size: 0.95rem;
     font-weight: 500;
     color: #f8fafc;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(2, 6, 23, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent !important; /* Contact Tile background transparent */
     transition: all 0.3s ease;
 }
 .contact-tile i { font-size: 1.3rem; }
