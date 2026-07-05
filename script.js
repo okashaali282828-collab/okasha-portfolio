@@ -5,18 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // 🎥 INTERSECTION OBSERVER FOR NATURAL VIDEO SNAP ENTRANCE
     const observerOptions = {
         root: null,
-        threshold: 0.12, // Trigged calculation matrix
-        rootMargin: "0px 0px -10% 0px"
+        threshold: 0.1, // Smooth entry logic
+        rootMargin: "0px 0px -15% 0px"
     };
 
     const sectionObserver = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("video-reveal-active");
-                
-                // 🔄 DYNAMIC SCROLL SPY: Automatically highlights top bar button on scroll
-                const currentId = entry.target.getAttribute("id");
-                updateActiveNavbarButton(currentId);
             }
         });
     }, observerOptions);
@@ -25,30 +21,47 @@ document.addEventListener("DOMContentLoaded", function () {
         sectionObserver.observe(section);
     });
 
-    // Function to handle navbar styling shifts safely
-    function updateActiveNavbarButton(activeSectionId) {
-        if (!activeSectionId) return;
+    // 🔄 REVOLUTIONARY BULLETPROOF SCROLL SPY TRACKER
+    window.addEventListener("scroll", function () {
+        let currentActiveSectionId = "";
         
-        navButtons.forEach(btn => {
-            btn.classList.remove("active");
-            
-            // Extracts matching targets from custom onclick tags safely
-            const clickAttr = btn.getAttribute("onclick") || "";
-            if (clickAttr.includes(`'${activeSectionId}'`) || clickAttr.includes(`"${activeSectionId}"`)) {
-                btn.classList.add("active");
+        // Mid-viewport focus coordinate calculation
+        const scrollTriggerLine = window.scrollY + (window.innerHeight * 0.35); 
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            if (scrollTriggerLine >= sectionTop && scrollTriggerLine < (sectionTop + sectionHeight)) {
+                currentActiveSectionId = section.getAttribute("id");
             }
         });
-    }
+
+        // Safe Fallback: If at the very top of the webpage, enforce Intro active
+        if (window.scrollY < 150) {
+            currentActiveSectionId = "intro-section"; // Replace with your exact introductory section HTML id if different
+        }
+
+        if (currentActiveSectionId) {
+            navButtons.forEach(btn => {
+                btn.classList.remove("active");
+                
+                const clickActionString = btn.getAttribute("onclick") || "";
+                if (clickActionString.includes(`'${currentActiveSectionId}'`) || clickActionString.includes(`"${currentActiveSectionId}"`)) {
+                    btn.classList.add("active");
+                }
+            });
+        }
+    });
 });
 
 // ⚡ HIGH VELOCITY SAFE INTERACTIVE SCROLLER
 function scrollToSection(sectionId) {
     const targetedElement = document.getElementById(sectionId);
     if (targetedElement) {
-        // Ensures element stays visible during the transition track to fix lag/black frame glitch
+        // Enforce visible presentation frames instantly to eliminate black lag drops
         targetedElement.classList.add("video-reveal-active");
         
-        // Pure smooth hardware transition tracking
         targetedElement.scrollIntoView({
             behavior: "smooth",
             block: "center"
